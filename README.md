@@ -8,7 +8,7 @@ A lightweight Python/Tkinter GUI workbench built for Linux that automates the tr
 
 This specific tool is **strictly engineered for "dirty" image-only PDFs** (such as drag-and-drop file merge outputs, automatic office copier streams, or scanner output packages where every single page layout element is wrapped inside an embedded PNG image payload). 
 
-It is **not** intended for standard text-selectable digital layout documents (such as vectorized PDFs containing real type font geometry layers). Also it doesn't currently do batch processing or include detection for non-PNG raster images… contributions welcome!
+It is **not** intended for standard text-selectable digital layout documents (such as vectorized PDFs containing real type font geometry layers). Also it doesn't currently do batch processing or include detection for non-PNG raster images inside PDFs… contributions welcome!
 
 ---
 
