@@ -10,7 +10,7 @@ Lorem Ipsum can take a hike. All examples should be content exposing Dianetics f
 
 *  [Volney Mathison and Alphia Hart FDA investigative documents - 1963](https://web.archive.org/web/20260605014217id_/http://scientology.c1.biz/Volney-Mathison-and-Alphia-Hart-FDA-investigative-documents.svg)
 *  [Intra-departmental Report on Scientologists breaking in to the Toronto office of Nancy McLean's lawyer - 1974](https://web.archive.org/web/20260605014002id_/http://scientology.c1.biz/toronto_breakin.svg)
-*  [Spain Expels 6 Scientologists in Fraud Case](https://web.archive.org/web/20260605025610id_/http://scientology.c1.biz/thecompiler-1988-8.svg#p6)
+*  [Spain Expels 6 Scientologists in Fraud Case - 1988](https://web.archive.org/web/20260605025610id_/http://scientology.c1.biz/thecompiler-1988-8.svg#p6)
 *  [Allegations Common to All Counts - 2009](https://web.archive.org/web/20260605013317id_/http://scientology.c1.biz/Allegations-Common-to-All-Counts.svg)
 
 ## PDFs with rotated pages
