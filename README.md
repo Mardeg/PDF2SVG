@@ -22,7 +22,7 @@ Before this automation script, verifying and processing these files required a p
 5. **Reality Adjustment**: Repeatedly bashing my head against the wall.
 6. **Optimization passes**: Drag-dropping raw file assets through external tool chains to strip hidden profile metadata chunks before stitching the code containers back together.
 
-**This GUI maps out that entire sequence inside a responsive processing timeline window, transforming minutes of error-prone manual labor into a single click.**
+**This GUI maps out that entire sequence inside a responsive processing timeline window, transforming minutes of error-prone manual labour into a single click.**
 
 ---
 
@@ -51,7 +51,7 @@ pip3 install pypdf pillow --break-system-packages
 *   **100% Pure URL Pagination: The viewer functions completely without runtime JavaScript [INDEX]. Browser pagination is controlled entirely through native SVG `<view>` IDs matching the URL document fragment [INDEX]. This means you can display individual pages from the .svg output directly in a webpage using an IMG or IFRAME src, or even a CSS background-image url() by including the #fragment in the URL. Up yours, inferior `<symbol>` spritesheets!
 *   **The Page-Bleed Separation Buffer**: To prevent adjacent pages, mobile scroll-frames, or nav layout button overlays from bleeding into view when dealing with mixed landscape and portrait aspects, every image layer is mathematically isolated inside the column by an extra **100% full-page height buffer space gap.**
 *   **Aria-Labelled Semantic Accessibility**: In an otherwise inaccessible text-as-png format, the SVG output features clean accessibility code like `aria-labelledby="pdf-title"` and  alongside descriptive `role="button"` properties on all touch-friendly interactive anchors. Mmmm, touch-friendly… ( • )( • )ԅ(‾⌣‾ԅ)
-*   **The Inversion Array Mask Sweeper**: The extraction parser queries underlying object properties to intercept hidden reverse color maps (`/Decode [1 0]`), running local transpositions in Pillow to guarantee blah blah blah RGB color compliance without… who the fuck even reads this far?
+*   **The Inversion Array Mask Sweeper**: The extraction parser queries underlying object properties to intercept hidden reverse colour maps (`/Decode [1 0]`), running local transpositions in Pillow to guarantee blah blah blah RGB colour compliance without… who the fuck even reads this far?
 
 ---
 
