@@ -16,6 +16,7 @@ Lorem Ipsum can take a hike. All examples should be content exposing Dianetics f
 
 *  [L.Ron Hubbard - An Opinion and a Summing Up - 1964](https://web.archive.org/web/20260605013812id_/http://scientology.c1.biz/OpinionSummingUp-1964-2.svg)
 *  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260605013135id_/http://scientology.c1.biz/19920516.svg)
+*  [Why a Portland Jury awarded $39 million in damages against one of the world's most profitable cults - 1985](https://web.archive.org/web/20260605021724id_/http://scientology.c1.biz/PortlandJury-1985.svg)
 *  [Narconon Rehab Fined For Wild Claims About Detox Programs - 2015](https://web.archive.org/web/20260605013629id_/http://scientology.c1.biz/NarcononFalseAdvertising.svg)
 
 ---
