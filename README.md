@@ -8,7 +8,6 @@ A lightweight Python/Tkinter GUI workbench built for Linux that automates the tr
 
 Lorem Ipsum can take a hike. All examples should be content exposing Dianetics for the pseudoscientific grift it is, whatever cloak it's wearing.
 
-*  [Why a Portland Jury awarded $39 million in damages against one of the world's most profitable cults - 1985](https://web.archive.org/web/20260605014639id_/http://scientology.c1.biz/PortlandJury1985.svg)
 *  [Volney Mathison and Alphia Hart FDA investigative documents - 1963](https://web.archive.org/web/20260605014217id_/http://scientology.c1.biz/Volney-Mathison-and-Alphia-Hart-FDA-investigative-documents.svg)
 *  [Intra-departmental Report on Scientologists breaking in to the office of Nancy McLean's lawyer - 1974](https://web.archive.org/web/20260605014002id_/http://scientology.c1.biz/toronto_breakin.svg)
 *  [Allegations Common to All Counts - 2009](https://web.archive.org/web/20260605013317id_/http://scientology.c1.biz/Allegations-Common-to-All-Counts.svg)
