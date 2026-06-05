@@ -31,7 +31,7 @@ Before this automation script, verifying and processing these files required a p
 Because this tool chains together high-performance binary layout optimization and stream decoding engines natively, you must configure the following dependencies inside your Linux terminal environment.
 
 #### 1. System Package Installations (Debian / Ubuntu / Linux Mint)
-Open your terminal and execute this exact string to install the required JBIG2 raster image decoder and lossless re-compression compilers:
+Open your terminal and execute this exact string (without the red colouring) to install the required JBIG2 raster image decoder and lossless re-compression compilers:
 
 ```bash
 sudo apt update && sudo apt install -y python3 python3-pip optipng pngcrush advancecomp jbig2dec
