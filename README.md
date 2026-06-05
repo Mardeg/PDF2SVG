@@ -13,7 +13,7 @@ Lorem Ipsum can take a hike. All examples should be content exposing Dianetics f
 *  [Spain Expels 6 Scientologists in Fraud Case - 1988](https://web.archive.org/web/20260605025610id_/http://scientology.c1.biz/thecompiler-1988-8.svg#p6)
 *  [Allegations Common to All Counts - 2009](https://web.archive.org/web/20260605013317id_/http://scientology.c1.biz/Allegations-Common-to-All-Counts.svg)
 
-## PDFs with rotated pages
+#### PDFs with rotated pages
 
 *  [L.Ron Hubbard - An Opinion and a Summing Up - 1964](https://web.archive.org/web/20260605013812id_/http://scientology.c1.biz/OpinionSummingUp-1964-2.svg)
 *  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260605013135id_/http://scientology.c1.biz/19920516.svg)
