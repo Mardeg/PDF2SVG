@@ -102,5 +102,6 @@ Alternatively, ensure you are inside the directory path hosting your application
 ```bash
 python3 PNGonlyPDF2SVG.py
 ```
-
+Oh look a History chart of something that you can affect in some inexplicable way!
+[![Star History Chart](https://starhistory.link/Mardeg/PDF2SVG.svg?theme=cyan)](https://starhistory.link/Mardeg/PDF2SVG)
 This readme was brought to you by the letter ζ
