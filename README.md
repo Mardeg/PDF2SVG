@@ -1,6 +1,6 @@
 # PDF to SVG Gallery tool
 
-A lightweight Python/Tkinter GUI workbench built for Linux that automates the transformation of image-only, "cheap and dirty" raster PDFs into 100% self-contained, highly optimized interactive web galleries of those same cheap and dirty raster images that this totally non-AI 🙄 readme will now outline.
+A lightweight Python/Tkinter GUI workbench built for Linux that automates the transformation of bitmap image-only, "cheap and dirty" PDFs into 100% self-contained, highly optimized interactive web galleries of those same cheap and dirty bitmap images that this totally non-AI 🙄 readme will now outline.
 
 ---
 
