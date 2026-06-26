@@ -40,7 +40,7 @@ Before this automation script, verifying and processing these files required a p
 5. **Reality Adjustment**: Repeatedly bashing my head against the wall.
 6. **Optimization passes**: Drag-dropping raw file assets through external tool chains to strip hidden profile metadata chunks before stitching the code containers back together.
 
-**This GUI maps out that entire sequence inside a responsive processing timeline window, transforming minutes of error-prone manual labour into a single click.**
+**This GUI maps out that entire sequence inside a responsive processing timeline window, transforming minutes of error-prone manual labour into seconds of error-prone clicking.**
 
 ---
 
