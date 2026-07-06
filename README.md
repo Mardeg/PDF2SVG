@@ -24,7 +24,7 @@ Lorem Ipsum can take a hike. All examples should be content exposing Dianetics f
 
 ### ⚠️ Scope & Use-Case Limit
 
-Something tells you, maybe even this very line in the readme, that this tool is **strictly engineered for "dirty" image-only PDFs** (such as drag-and-drop file merge outputs, automatic office copier streams, or scanner output packages where every single page layout element is wrapped inside an embedded PNG image payload). 
+Something tells you, maybe even this very line in the readme, that this tool is **strictly engineered for "dirty" image-only PDFs** (such as drag-and-drop file merge outputs, the default Linux Mint Document Viewer "print to file" when extracting excerpts, automatic office copier streams, or scanner output packages where every single page layout element is wrapped inside an embedded PNG image payload). 
 
 It is **not** intended for standard text-selectable digital layout documents (such as vectorized PDFs containing real type font geometry layers… why did I whisper that?). Also it doesn't currently do batch processing or include detection for non-PNG raster images inside PDFs… contributions welcome!
 
