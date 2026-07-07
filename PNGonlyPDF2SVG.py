@@ -58,7 +58,7 @@ class PDFGalleryApp:
             self.top_frame, textvariable=self.status_var, font=("Helvetica", 10, "italic")
         )
         self.status_label.pack(anchor=tk.W)
-        # Horizontal container frame to hold both checkboxes side-by-side
+        # Horizontal container frame to hold both checkboxes and the dropdown side-by-side
         self.checkbox_frame = ttk.Frame(self.top_frame)
         self.checkbox_frame.pack(anchor=tk.W, pady=(5, 5))
 
@@ -76,9 +76,21 @@ class PDFGalleryApp:
         self.reduce_colours_chk = ttk.Checkbutton(
             self.checkbox_frame, 
             text="Reduce colours", 
-            variable=self.reduce_colours_var
+            variable=self.reduce_colours_var,
+            command=self.toggle_color_dropdown
         )
-        self.reduce_colours_chk.pack(side=tk.LEFT)
+        self.reduce_colours_chk.pack(side=tk.LEFT, padx=(0, 5))
+
+        # Dropdown: Dynamic colour spectrum picker (Greyed out by default)
+        self.color_dropdown_var = tk.StringVar(value="256")
+        self.color_dropdown = ttk.Combobox(
+            self.checkbox_frame,
+            textvariable=self.color_dropdown_var,
+            values=["256", "128", "64", "32", "16", "8", "4"],
+            width=5,
+            state="disabled"
+        )
+        self.color_dropdown.pack(side=tk.LEFT)
 
         self.progress_bar = ttk.Progressbar(self.top_frame, orient="horizontal", mode="determinate")
         self.progress_bar.pack(fill=tk.X, pady=(5, 5))
@@ -112,6 +124,13 @@ class PDFGalleryApp:
             self.action_frame, text="Compile and Optimize SVG Gallery", command=self.start_svg_compilation, state=tk.DISABLED
         )
         self.convert_btn.pack(fill=tk.X)
+
+    def toggle_color_dropdown(self):
+        """Dynamic interface binder: activates or greys out the drop menu based on checkbox state."""
+        if self.reduce_colours_var.get():
+            self.color_dropdown.config(state="readonly")
+        else:
+            self.color_dropdown.config(state="disabled")
 
     def select_and_process(self):
         # Dummy anchor hook to keep internal Tkinter references mapped consistently
@@ -375,8 +394,11 @@ class PDFGalleryApp:
                     elif hasattr(self, 'status_var'):
                         self.status_var.set(status_msg)
                     
-                    # Flatten the full-colour solid image down to a fast, tight 256-colour adaptive layout
-                    processed_img = processed_img.convert("P", palette=Image.Palette.ADAPTIVE, colors=256)
+                    # Pull dynamic colour selection from UI and convert to integer fallback safely
+                    chosen_colors = int(self.color_dropdown_var.get())
+                    
+                    # Crush full color layer down to user's targeted bit target spectrum value
+                    processed_img = processed_img.convert("P", palette=Image.Palette.ADAPTIVE, colors=chosen_colors)
 
                 buffer = io.BytesIO()
                 
