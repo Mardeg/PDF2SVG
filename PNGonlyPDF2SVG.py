@@ -58,6 +58,27 @@ class PDFGalleryApp:
             self.top_frame, textvariable=self.status_var, font=("Helvetica", 10, "italic")
         )
         self.status_label.pack(anchor=tk.W)
+        # Horizontal container frame to hold both checkboxes side-by-side
+        self.checkbox_frame = ttk.Frame(self.top_frame)
+        self.checkbox_frame.pack(anchor=tk.W, pady=(5, 5))
+
+        # Checkbox 1: Remove Transparency (Ticked by default)
+        self.remove_transparency_var = tk.BooleanVar(value=True)
+        self.transparency_chk = ttk.Checkbutton(
+            self.checkbox_frame, 
+            text="Remove transparency", 
+            variable=self.remove_transparency_var
+        )
+        self.transparency_chk.pack(side=tk.LEFT, padx=(0, 15))
+
+        # Checkbox 2: Reduce Colours (Unticked by default)
+        self.reduce_colours_var = tk.BooleanVar(value=False)
+        self.reduce_colours_chk = ttk.Checkbutton(
+            self.checkbox_frame, 
+            text="Reduce colours", 
+            variable=self.reduce_colours_var
+        )
+        self.reduce_colours_chk.pack(side=tk.LEFT)
 
         self.progress_bar = ttk.Progressbar(self.top_frame, orient="horizontal", mode="determinate")
         self.progress_bar.pack(fill=tk.X, pady=(5, 5))
@@ -310,12 +331,69 @@ class PDFGalleryApp:
                 
                 self.update_status(f"Compiling: Optimizing Page {page_num}/{total_pages}...")
 
-                buffer = io.BytesIO()
-                pil_img.save(buffer, format="PNG")
-                raw_bytes = buffer.getvalue()
+                # --- START OF DUAL-CHECKBOX IMAGE MODIFICATION ---
+                processed_img = pil_img.copy()
+                transparency_detected = False
+                color_reduced = False
 
-                # Pass stream to external compression tools
-                optimized_bytes = self.optimize_png_bytes(raw_bytes, page_num)
+                # 1. Handle Transparency Path
+                if self.remove_transparency_var.get():
+                    if processed_img.mode in ("RGBA", "LA") or (processed_img.mode == "P" and "transparency" in processed_img.info):
+                        transparency_detected = True
+                        
+                        # Format status message using the script's native arrow aesthetic
+                        status_msg = f"Page {index + 1} → Removing transparency..."
+                        
+                        if hasattr(self, 'pipeline_error_queue'):
+                            self.pipeline_error_queue.put(status_msg)
+                        elif hasattr(self, 'status_queue'):
+                            getattr(self, 'status_queue').put(status_msg)
+                        elif hasattr(self, 'error_queue'):
+                            getattr(self, 'error_queue').put(status_msg)
+                        elif hasattr(self, 'status_var'):
+                            self.status_var.set(status_msg)
+
+                        if processed_img.mode != "RGBA":
+                            processed_img = processed_img.convert("RGBA")
+                            
+                        background = Image.new("RGB", processed_img.size, (255, 255, 255))
+                        alpha_mask = processed_img.getchannel('A')
+                        background.paste(processed_img, (0, 0), mask=alpha_mask)
+                        processed_img = background.convert("L").convert("P", palette=Image.Palette.ADAPTIVE, colors=128)
+
+                # 2. Handle Solid Background Path (Only if Transparency wasn't triggered)
+                if not transparency_detected and self.reduce_colours_var.get():
+                    color_reduced = True
+                    
+                    status_msg = f"Page {index + 1} → Reducing colors..."
+                    if hasattr(self, 'pipeline_error_queue'):
+                        self.pipeline_error_queue.put(status_msg)
+                    elif hasattr(self, 'status_queue'):
+                        getattr(self, 'status_queue').put(status_msg)
+                    elif hasattr(self, 'error_queue'):
+                        getattr(self, 'error_queue').put(status_msg)
+                    elif hasattr(self, 'status_var'):
+                        self.status_var.set(status_msg)
+                    
+                    # Flatten the full-colour solid image down to a fast, tight 256-colour adaptive layout
+                    processed_img = processed_img.convert("P", palette=Image.Palette.ADAPTIVE, colors=256)
+
+                buffer = io.BytesIO()
+                
+                # If either modification logic was applied, save cleanly to bypass heavy compression inflation
+                if transparency_detected or color_reduced:
+                    processed_img.save(buffer, format="PNG")
+                else:
+                    processed_img.save(buffer, format="PNG", optimize=True)
+                    
+                raw_bytes = buffer.getvalue()
+                # --- END OF MODIFICATION ---
+
+                # Pass stream to external compression tools ONLY if no custom processing occurred
+                if transparency_detected or color_reduced:
+                    optimized_bytes = raw_bytes
+                else:
+                    optimized_bytes = self.optimize_png_bytes(raw_bytes, page_num)
 
                 b64_data = base64.b64encode(optimized_bytes).decode("utf-8")
                 data_uri = f"data:image/png;base64,{b64_data}"
