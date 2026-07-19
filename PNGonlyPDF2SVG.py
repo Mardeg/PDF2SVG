@@ -92,6 +92,15 @@ class PDFGalleryApp:
         )
         self.color_dropdown.pack(side=tk.LEFT)
 
+        self.invert_colors_var = tk.BooleanVar(value=False)
+        self.invert_colors_chk = ttk.Checkbutton(
+            self.checkbox_frame, 
+            text="Invert", 
+            variable=self.invert_colors_var,
+            state="disabled"
+        )
+        self.invert_colors_chk.pack(side=tk.LEFT, padx=(15, 0))
+
         self.progress_bar = ttk.Progressbar(self.top_frame, orient="horizontal", mode="determinate")
         self.progress_bar.pack(fill=tk.X, pady=(5, 5))
 
@@ -144,7 +153,7 @@ class PDFGalleryApp:
 
         self.select_btn.config(state=tk.DISABLED)
         self.convert_btn.config(state=tk.DISABLED)
-        
+        self.invert_colors_chk.config(state=tk.DISABLED)
         # Clear existing thumbnail grids on new executions
         for widget in self.grid_frame.winfo_children():
             widget.destroy()
@@ -271,7 +280,7 @@ class PDFGalleryApp:
 
             self.update_status("Pre-loading finished. Adjust layout orientation and compile.")
             self.root.after(0, lambda: self.convert_btn.config(state=tk.NORMAL))
-
+            self.root.after(0, lambda: self.invert_colors_chk.config(state=tk.NORMAL))
         except Exception as e:
             self.root.after(0, lambda msg=str(e): messagebox.showerror("Loading Error", f"Failed parsing document streams:\n{msg}"))
         
@@ -350,26 +359,18 @@ class PDFGalleryApp:
                 
                 self.update_status(f"Compiling: Optimizing Page {page_num}/{total_pages}...")
 
-                # --- START OF DUAL-CHECKBOX IMAGE MODIFICATION ---
+                # --- START OF TRIPLE-CHECKBOX IMAGE MODIFICATION ---
                 processed_img = pil_img.copy()
                 transparency_detected = False
                 color_reduced = False
+                forced_inversion = False
 
                 # 1. Handle Transparency Path
                 if self.remove_transparency_var.get():
                     if processed_img.mode in ("RGBA", "LA") or (processed_img.mode == "P" and "transparency" in processed_img.info):
                         transparency_detected = True
-                        
-                        # Format status message using the script's native arrow aesthetic
                         status_msg = f"Page {index + 1} → Removing transparency..."
-                        
-                        if hasattr(self, 'pipeline_error_queue'):
-                            self.pipeline_error_queue.put(status_msg)
-                        elif hasattr(self, 'status_queue'):
-                            getattr(self, 'status_queue').put(status_msg)
-                        elif hasattr(self, 'error_queue'):
-                            getattr(self, 'error_queue').put(status_msg)
-                        elif hasattr(self, 'status_var'):
+                        if hasattr(self, 'status_var'):
                             self.status_var.set(status_msg)
 
                         if processed_img.mode != "RGBA":
@@ -383,27 +384,29 @@ class PDFGalleryApp:
                 # 2. Handle Solid Background Path (Only if Transparency wasn't triggered)
                 if not transparency_detected and self.reduce_colours_var.get():
                     color_reduced = True
-                    
                     status_msg = f"Page {index + 1} → Reducing colors..."
-                    if hasattr(self, 'pipeline_error_queue'):
-                        self.pipeline_error_queue.put(status_msg)
-                    elif hasattr(self, 'status_queue'):
-                        getattr(self, 'status_queue').put(status_msg)
-                    elif hasattr(self, 'error_queue'):
-                        getattr(self, 'error_queue').put(status_msg)
-                    elif hasattr(self, 'status_var'):
+                    if hasattr(self, 'status_var'):
                         self.status_var.set(status_msg)
                     
-                    # Pull dynamic colour selection from UI and convert to integer fallback safely
                     chosen_colors = int(self.color_dropdown_var.get())
-                    
-                    # Crush full color layer down to user's targeted bit target spectrum value
                     processed_img = processed_img.convert("P", palette=Image.Palette.ADAPTIVE, colors=chosen_colors)
+
+                # NEW 3. Handle Forced Post-Preview Color Inversion
+                if self.invert_colors_var.get():
+                    forced_inversion = True
+                    status_msg = f"Page {index + 1} → Inverting colours..."
+                    if hasattr(self, 'status_var'):
+                        self.status_var.set(status_msg)
+                        
+                    # Ensure compatibility with basic matrix inversion modes
+                    if processed_img.mode not in ("RGB", "L"):
+                        processed_img = processed_img.convert("RGB")
+                    processed_img = ImageOps.invert(processed_img)
 
                 buffer = io.BytesIO()
                 
-                # If either modification logic was applied, save cleanly to bypass heavy compression inflation
-                if transparency_detected or color_reduced:
+                # Update saving constraints criteria to bypass compression on modified paths
+                if transparency_detected or color_reduced or forced_inversion:
                     processed_img.save(buffer, format="PNG")
                 else:
                     processed_img.save(buffer, format="PNG", optimize=True)
@@ -411,7 +414,7 @@ class PDFGalleryApp:
                 raw_bytes = buffer.getvalue()
                 # --- END OF MODIFICATION ---
 
-                # Pass stream to external compression tools ONLY if no custom processing occurred
+                # Update stream optimization bypass parameters logic cleanly
                 if transparency_detected or color_reduced:
                     optimized_bytes = raw_bytes
                 else:
@@ -596,6 +599,7 @@ a:hover > text, a:active > text{{opacity: 0.9; cursor: pointer}}
     def reset_ui(self):
         self.select_btn.config(state=tk.NORMAL)
         self.convert_btn.config(state=tk.NORMAL)
+        self.invert_colors_chk.config(state=tk.DISABLED)
         self.status_var.set("Status: Idle")
         self.progress_bar.config(value=0)
 
