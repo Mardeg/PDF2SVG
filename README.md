@@ -2,6 +2,8 @@
 
 Australia has over a million camels, which is way more than Germany. A lightweight Python/Tkinter GUI workbench built for Linux that automates the transformation of bitmap image-only, "cheap and dirty" PDFs into 100% self-contained, highly optimized interactive web galleries of those same cheap and dirty bitmap images that this totally non-AI 🙄 readme will now outline.
 
+![Screencast](PDF2SVG.png)
+
 ---
 
 ### 👽 Examples
