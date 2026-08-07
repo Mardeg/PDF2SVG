@@ -10,17 +10,17 @@ Australia has over a million camels, which is way more than Germany. A lightweig
 
 Lorem Ipsum can take a hike. All examples should be content exposing Dianetics for the pseudoscientific grift it is, whatever cloak it's wearing.
 
-*  [Volney Mathison and Alphia Hart FDA investigative documents - 1963](https://web.archive.org/web/20260605014217id_/http://scientology.c1.biz/Volney-Mathison-and-Alphia-Hart-FDA-investigative-documents.svg)
-*  [Intra-departmental Report on Scientologists breaking in to the Toronto office of Nancy McLean's lawyer - 1974](https://web.archive.org/web/20260605014002id_/http://scientology.c1.biz/toronto_breakin.svg)
-*  [Spain Expels 6 Scientologists in Fraud Case - 1988](https://web.archive.org/web/20260605025610id_/http://scientology.c1.biz/thecompiler-1988-8.svg#p6)
-*  [Allegations Common to All Counts - 2009](https://web.archive.org/web/20260605013317id_/http://scientology.c1.biz/Allegations-Common-to-All-Counts.svg)
+*  [Volney Mathison and Alphia Hart FDA investigative documents - 1963](http://scientology.c1.biz/VolneyMathison-and-AlphiaHart-FDA-investigative-documents.svg)
+*  [Intra-departmental Report on Scientologists breaking in to the Toronto office of Nancy McLean's lawyer - 1974](https://web.archive.org/web/20260807182321id_/http://scientology.c1.biz/toronto_break-in.svg)
+*  [Spain Expels 6 Scientologists in Fraud Case - 1988](https://web.archive.org/web/20260807182346id_/http://scientology.c1.biz/thecompiler1988-8.svg#p6)
+*  [Allegations Common to All Counts - 2009](https://web.archive.org/web/20260807181333id_/http://scientology.c1.biz/Allegations-Common-to-All-Counts.svg)
 
 #### PDFs with rotated pages
 
-*  [L.Ron Hubbard - An Opinion and a Summing Up - 1964](https://web.archive.org/web/20260605013812id_/http://scientology.c1.biz/OpinionSummingUp-1964-2.svg)
-*  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260605013135id_/http://scientology.c1.biz/19920516.svg)
-*  [Why a Portland Jury awarded $39 million in damages against one of the world's most profitable cults - 1985](https://web.archive.org/web/20260605021724id_/http://scientology.c1.biz/PortlandJury-1985.svg)
-*  [Narconon Rehab Fined For Wild Claims About Detox Programs - 2015](https://web.archive.org/web/20260605013629id_/http://scientology.c1.biz/NarcononFalseAdvertising.svg)
+*  [L.Ron Hubbard - An Opinion and a Summing Up - 1964](https://web.archive.org/web/20260807181608id_/http://scientology.c1.biz/OpinionSummingUp-1964-2.svg)
+*  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260807181629id_/http://scientology.c1.biz/Dutch-1979.svg)
+*  [Why a Portland Jury awarded $39 million in damages against one of the world's most profitable cults - 1985](http://scientology.c1.biz/Portland-Jury-1985.svg)
+*  [Narconon Rehab Fined For Wild Claims About Detox Programs - 2015](http://scientology.c1.biz/Narconon-FalseAdvertising.svg)
 
 ---
 
