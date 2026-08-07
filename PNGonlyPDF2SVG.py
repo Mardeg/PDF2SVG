@@ -490,14 +490,14 @@ class PDFGalleryApp:
                 if page_meta["rotation"] > 0:
                     if page_num == 1:
                         sibling_selectors.append(
-                            f'#p1:target > image[y="{y_offset}"], '
-                            f'svg:not(:target) > image[y="{y_offset}"] {{ '
+                            f'#p1:target ~ g > image[y="{y_offset}"], '
+                            f'svg:not(:target) > g > image[y="{y_offset}"] {{ '
                             f'transform: rotate({page_meta["rotation"]}deg); '
                             f'}}'
                         )
                     else:
                         sibling_selectors.append(
-                            f'#p{page_num}:target ~ image[y="{y_offset}"] {{ '
+                            f'#p{page_num}:target ~ g > image[y="{y_offset}"] {{ '
                             f'transform: rotate({page_meta["rotation"]}deg); '
                             f'}}'
                         )
