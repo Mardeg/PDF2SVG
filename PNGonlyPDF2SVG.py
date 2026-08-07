@@ -523,18 +523,18 @@ text{{
     line-height:{calculated_line_height}px;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }}
-a:hover > text, a:active > text{{opacity: 0.9; cursor: pointer}}
+a:hover > text, a:focus > text{{opacity: 0.9; cursor: pointer}}
 {"\n".join(sibling_selectors)}
 /* ]]> */
 </style>
 <script>
 /* <![CDATA[ */
-function betterKBnav() {
+function betterKBnav() {{
     let page = location.hash.slice(2);
     if (!document.getElementById("page" + page)) page = "1";
     for (const n of document.querySelectorAll("g > a")) n.setAttribute("tabindex", "-1");
     for (const n of document.querySelectorAll("#page" + page + " > a")) n.setAttribute("tabindex", "0");
-}
+}}
 window.addEventListener("DOMContentLoaded", betterKBnav);
 window.addEventListener("hashchange", betterKBnav);
 /* ]]> */
