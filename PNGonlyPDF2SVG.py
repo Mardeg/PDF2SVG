@@ -477,11 +477,11 @@ class PDFGalleryApp:
                 x_next = int(img_width * 0.95 - (calculated_font_size * 1.2))
 
                 content_elements.append(
-                    f'<a href="{prev_href}" role="button" aria-label="Go to Page {prev_target_num}">'
+                    f'<a href="{prev_href}" aria-label="Go to Page {prev_target_num}">'
                     f'<text x="{x_prev}" y="{text_y}">⏮️</text></a>'
                 )
                 content_elements.append(
-                    f'<a href="{next_href}" role="button" aria-label="Go to Page {next_target_num}">'
+                    f'<a href="{next_href}" aria-label="Go to Page {next_target_num}">'
                     f'<text x="{x_next}" y="{text_y}">⏭️</text></a>'
                 )
                 content_elements.append(
