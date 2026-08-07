@@ -459,13 +459,13 @@ class PDFGalleryApp:
                     views.append(
                         f'<view id="p{page_num}" viewBox="0 {y_offset} {img_width} {img_height}"/>'
                     )
-
+                content_elements.append(
+                    f'<g id="page{page_num}">'
+                )
                 content_elements.append(
                     f'<image x="0" y="{y_offset}" href="{page_meta["uri"]}" '
                     f'role="img" aria-label="Page {page_num} of {total_pages}" />'
                 )
-
-                # Navigation sequence maps (always use explicit #pN fragment identifiers)
                 prev_target_num = total_pages if page_num == 1 else (1 if page_num == 2 else page_num - 1)
                 next_target_num = 1 if page_num == total_pages else page_num + 1
 
@@ -484,8 +484,9 @@ class PDFGalleryApp:
                     f'<a href="{next_href}" role="button" aria-label="Go to Page {next_target_num}">'
                     f'<text x="{x_next}" y="{text_y}">⏭️</text></a>'
                 )
-
-                # CSS Target-Driven Rotation
+                content_elements.append(
+                    f'</g>'
+                )
                 if page_meta["rotation"] > 0:
                     if page_num == 1:
                         sibling_selectors.append(
@@ -526,6 +527,18 @@ a:hover > text, a:active > text{{opacity: 0.9; cursor: pointer}}
 {"\n".join(sibling_selectors)}
 /* ]]> */
 </style>
+<script>
+/* <![CDATA[ */
+function betterKBnav() {
+    let page = location.hash.slice(2);
+    if (!document.getElementById("page" + page)) page = "1";
+    for (const n of document.querySelectorAll("g > a")) n.setAttribute("tabindex", "-1");
+    for (const n of document.querySelectorAll("#page" + page + " > a")) n.setAttribute("tabindex", "0");
+}
+window.addEventListener("DOMContentLoaded", betterKBnav);
+window.addEventListener("hashchange", betterKBnav);
+/* ]]> */
+</script>
 {"\n".join(views)}
 {"\n".join(content_elements)}
 </svg>"""
