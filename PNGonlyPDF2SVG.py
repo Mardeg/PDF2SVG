@@ -446,6 +446,9 @@ class PDFGalleryApp:
             calculated_line_height = int(calculated_font_size * 1.2)
             padding_bottom = int(calculated_font_size // 2)
 
+            # Ensure there's a view for page 1 matching the svg viewBox (insert before view p2)
+            views.append(f'<view id="p1" viewBox="0 0 {img_width} {img_height}"/>')
+
             # Assembly loop blocks
             for index, page_meta in enumerate(extracted_pages_metadata):
                 page_num = index + 1
@@ -462,13 +465,13 @@ class PDFGalleryApp:
                     f'role="img" aria-label="Page {page_num} of {total_pages}" />'
                 )
 
-                # Navigation sequence maps
-                prev_href = f"#p{total_pages}" if page_num == 1 else ("#" if page_num == 2 else f"#p{page_num - 1}")
-                next_href = "#" if page_num == total_pages else f"#p{page_num + 1}"
-                
+                # Navigation sequence maps (always use explicit #pN fragment identifiers)
                 prev_target_num = total_pages if page_num == 1 else (1 if page_num == 2 else page_num - 1)
                 next_target_num = 1 if page_num == total_pages else page_num + 1
 
+                prev_href = f"#p{prev_target_num}"
+                next_href = f"#p{next_target_num}"
+                
                 text_y = int(y_offset + img_height - padding_bottom)
                 x_prev = int(img_width * 0.05)
                 x_next = int(img_width * 0.95 - (calculated_font_size * 1.2))
@@ -499,7 +502,7 @@ class PDFGalleryApp:
                         )
 
             svg_output = f"""<?xml version="1.0" encoding="UTF-8"?>
-<svg id="p1" version="2" viewBox="0 0 {img_width} {img_height}" 
+<svg version="2" viewBox="0 0 {img_width} {img_height}" 
      role="application" aria-labelledby="pdf-title"
      xmlns="http://www.w3.org/2000/svg">
 <title id="pdf-title">{self.extracted_title}</title>
