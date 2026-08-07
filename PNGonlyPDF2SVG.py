@@ -529,14 +529,25 @@ a:hover > text, a:focus > text{{opacity: 0.9; cursor: pointer}}
 </style>
 <script>
 /* <![CDATA[ */
-function betterKBnav() {{
-    let page = location.hash.slice(2);
-    if (!document.getElementById("page" + page)) page = "1";
-    for (const n of document.querySelectorAll("g > a")) n.setAttribute("tabindex", "-1");
-    for (const n of document.querySelectorAll("#page" + page + " > a")) n.setAttribute("tabindex", "0");
+function betterKBnav(pk) {{
+    if (typeof pk === "string") {{
+       switch(pk) {{
+          case "ArrowRight": return document.querySelector('a[tabindex="0"]:last-of-type').getAttribute("href");
+          case "ArrowLeft": return document.querySelector('a[tabindex="0"]:first-of-type').getAttribute("href");
+          case "Home": return "#p1";
+          case "End": return "#p" + document.querySelector("g:last-of-type").getAttribute("id").slice(4);
+          default: return location.hash;
+       }}
+    }}else{{
+       let page = location.hash.slice(2);
+       if (!document.getElementById("page" + page)) page = "1";
+       for (const n of document.querySelectorAll("g > a")) n.setAttribute("tabindex", "-1");
+       for (const n of document.querySelectorAll("#page" + page + " > a")) n.setAttribute("tabindex", "0");
+    }}
 }}
 window.addEventListener("DOMContentLoaded", betterKBnav);
 window.addEventListener("hashchange", betterKBnav);
+document.addEventListener("keydown", e => location.hash = betterKBnav(!["Tab","Shift"].includes(e.key)?e.key:location.hash?location.hash:"Home"));
 /* ]]> */
 </script>
 {"\n".join(views)}
