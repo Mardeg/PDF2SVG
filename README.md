@@ -18,7 +18,7 @@ Lorem Ipsum can take a hike. All examples should be content exposing Dianetics f
 #### PDFs with rotated pages
 
 *  [L.Ron Hubbard - An Opinion and a Summing Up - 1964](https://web.archive.org/web/20260807181608id_/http://scientology.c1.biz/OpinionSummingUp-1964-2.svg)
-*  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260807181629id_/http://scientology.c1.biz/Dutch-1979.svg)
+*  [I've no idea what this says but I'm sure it's scathing - 1984](https://web.archive.org/web/20260813160141id_/http://scientology.c1.biz/Dutch-1979.svg)
 *  [Why a Portland Jury awarded $39 million in damages against one of the world's most profitable cults - 1985](https://web.archive.org/web/20260807182635id_/http://scientology.c1.biz/Portland-Jury-1985.svg)
 *  [Narconon Rehab Fined For Wild Claims About Detox Programs - 2015](https://web.archive.org/web/20260807182618id_/http://scientology.c1.biz/Narconon-FalseAdvertising.svg)
 
