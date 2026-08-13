@@ -515,7 +515,7 @@ class PDFGalleryApp:
 <title id="pdf-title">{self.extracted_title}</title>
 <style>
 /* <![CDATA[ */
-svg{{width:100vw;height:100vh;background-color:#444}}
+svg{{width:100dvw;height:100dvh;background-color:#444}}
 image{{
     width:{img_width}px;
     height:{img_height}px;
