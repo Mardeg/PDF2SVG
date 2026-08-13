@@ -448,6 +448,7 @@ class PDFGalleryApp:
 
             # Ensure there's a view for page 1 matching the svg viewBox (insert before view p2)
             views.append(f'<view id="p1" viewBox="0 0 {img_width} {img_height}"/>')
+            views.append(f'<view id="i1" viewBox="0 0 {img_width} {img_height}"/>')
 
             # Assembly loop blocks
             for index, page_meta in enumerate(extracted_pages_metadata):
@@ -458,6 +459,9 @@ class PDFGalleryApp:
                 if page_num >= 2:
                     views.append(
                         f'<view id="p{page_num}" viewBox="0 {y_offset} {img_width} {img_height}"/>'
+                    )
+                    views.append(
+                        f'<view id="i{page_num}" viewBox="0 {y_offset} {img_width} {img_height}"/>'
                     )
                 content_elements.append(
                     f'<g id="page{page_num}">'
@@ -491,20 +495,22 @@ class PDFGalleryApp:
                     if page_num == 1:
                         sibling_selectors.append(
                             f'#p1:target ~ g > image[y="{y_offset}"], '
+                            f'#i1:target ~ g > image[y="{y_offset}"], '
                             f'svg:not(:target) > g > image[y="{y_offset}"] {{ '
                             f'transform: rotate({page_meta["rotation"]}deg); '
                             f'}}'
                         )
                     else:
                         sibling_selectors.append(
-                            f'#p{page_num}:target ~ g > image[y="{y_offset}"] {{ '
+                            f'#p{page_num}:target ~ g > image[y="{y_offset}"], '
+                            f'#i{page_num}:target ~ g > image[y="{y_offset}"] {{ '
                             f'transform: rotate({page_meta["rotation"]}deg); '
                             f'}}'
                         )
 
             svg_output = f"""<?xml version="1.0" encoding="UTF-8"?>
 <svg version="2" viewBox="0 0 {img_width} {img_height}" 
-     role="application" aria-labelledby="pdf-title"
+     role="group" aria-labelledby="pdf-title" aria-roledescription="carousel" aria-live="polite"
      xmlns="http://www.w3.org/2000/svg">
 <title id="pdf-title">{self.extracted_title}</title>
 <style>
@@ -523,6 +529,7 @@ text{{
     line-height:{calculated_line_height}px;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 }}
+view[id^="i"]:target ~ g > a > text {{opacity: 0}}
 a:hover > text, a:focus > text{{opacity: 0.9; cursor: pointer}}
 {"\n".join(sibling_selectors)}
 /* ]]> */
@@ -536,6 +543,9 @@ function betterKBnav(pk) {{
           case "ArrowLeft": return document.querySelector('a[tabindex="0"]:first-of-type').getAttribute("href");
           case "Home": return "#p1";
           case "End": return "#p" + document.querySelector("g:last-of-type").getAttribute("id").slice(4);
+          case "Control": 
+             const itoggle = location.hash.at(1);
+             return itoggle?(itoggle=="p"?"i":"p") + location.hash.slice(2):"i1";
           default: return location.hash;
        }}
     }}else{{
@@ -543,10 +553,14 @@ function betterKBnav(pk) {{
        if (!document.getElementById("page" + page)) page = "1";
        for (const n of document.querySelectorAll("g > a")) n.setAttribute("tabindex", "-1");
        for (const n of document.querySelectorAll("#page" + page + " > a")) n.setAttribute("tabindex", "0");
+       for (const n of document.querySelectorAll("g")) n.removeAttribute("aria-current");
+       document.getElementById("page" + page).setAttribute("aria-current","true");
     }}
 }}
 window.addEventListener("DOMContentLoaded", betterKBnav);
 window.addEventListener("hashchange", betterKBnav);
+window.addEventListener('auxclick', e => e.button === 1 && (e.preventDefault() || (location.hash = betterKBnav("Control"))));
+window.addEventListener('wheel', e => e.preventDefault() || (location.hash = betterKBnav(e.deltaY > 0 ? "ArrowRight" : "ArrowLeft")), {{ passive: false }});
 document.addEventListener("keydown", e => location.hash = betterKBnav(!["Tab","Shift"].includes(e.key)?e.key:location.hash?location.hash:"Home"));
 /* ]]> */
 </script>
